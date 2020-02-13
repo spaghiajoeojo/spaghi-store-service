@@ -1,0 +1,4 @@
+{
+    "token_salt": "mytoken",
+    "mongodb_url": "mongodb://mongo/server_data"
+}
