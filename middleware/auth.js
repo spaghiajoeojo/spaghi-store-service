@@ -12,7 +12,7 @@ module.exports = function (req, res, next) {
     try {
         //if can verify the token, set req.user and pass to next middleware
         const decoded = jwt.verify(token, config.get("token_salt"));
-        if (decoded.expiration < new Date().getTime()) {
+        if (decoded.expiration < new Date().getTime() && decoded.expiration !== -1) {
             throw new Error("Invalid token");
         }
         req.user = decoded;

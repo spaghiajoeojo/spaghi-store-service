@@ -32,7 +32,7 @@ UserSchema.methods.generateAuthToken = function () {
     const day = 30;
     const token = jwt.sign({
         _id: this._id,
-        expiration: new Date().getTime() + (day*86400*1000)
+        expiration: new Date().getTime() + (config.get("lifetime_token")*1000)
     }, config.get('token_salt')); //get the private key from the config file -> environment variable
     return token;
 }
