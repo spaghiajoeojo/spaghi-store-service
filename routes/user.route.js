@@ -44,7 +44,7 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
 
   let user = await User.findOne({
-    email: req.body.email
+    name: req.body.name
   });
   if (!user) return res.status(400).send("User not registered.");
 
