@@ -1,21 +1,27 @@
 {
   "name": "game-service-server",
-  "version": "0.0.1a",
+  "version": "0.8.0b",
   "description": "A simple server to manage game services",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "nodemon -L server.js",
+    "start": "docker-compose up"
   },
   "keywords": [],
   "author": "Lorenzo Beccaro",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^3.0.8",
-    "config": "^3.2.5",
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
     "express": "^4.17.1",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.11",
-    "ws": "^7.2.1"
+    "mongoose": "^5.9.16",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.8",
+    "ws": "^7.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.4"
   }
 }

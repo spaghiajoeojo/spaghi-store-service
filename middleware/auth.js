@@ -1,7 +1,11 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
 
-module.exports = function (req, res, next) {
+const {
+    User
+} = require("../models/user.model");
+
+module.exports = async function (req, res, next) {
     //get the token from the header if present
     const token = req.headers["x-access-token"] || req.headers["authorization"];
     //if no token found, return response (without going to the next middelware)
@@ -16,6 +20,10 @@ module.exports = function (req, res, next) {
             throw new Error("Invalid token");
         }
         req.user = decoded;
+        const user = await User.findById(decoded._id);
+
+        user.lastSeen = Date.now();
+        user.save();
         next();
     } catch (ex) {
         //if invalid token
