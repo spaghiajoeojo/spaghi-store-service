@@ -38,12 +38,20 @@ app.use(function (err, req, res, next) {
 });
 
 const port = process.env.PORT || 3000;
+let credentials;
+if (config.has("credetials")) {
+    let crt_config = config.get("credentials");
+    credentials = {
+        key: fs.readFileSync(crt_config.key),
+        cert: fs.readFileSync(crt_config.cert)
+    };
+} else {
+    credentials = {
+        key: fs.readFileSync(__dirname + '/cert/selfsigned.key'),
+        cert: fs.readFileSync(__dirname + '/cert/selfsigned.crt')
+    };
+}
 
-
-let credentials = {
-    key: fs.readFileSync(__dirname + '/cert/selfsigned.key'),
-    cert: fs.readFileSync(__dirname + '/cert/selfsigned.crt')
-};
 let server = https.createServer(credentials, app).listen(port, () => console.log(`Listening on port ${port}...`));
 let wss = new WebSocket.Server({
     server: server,
