@@ -145,10 +145,10 @@ router.get("/friends", auth, async (req, res) => {
   res.send(user);
 });
 
-router.get("/", async (req, res) => {
+// router.get("/", async (req, res) => {
 
-  res.status(200).send(await User.find({}).select("-password -avatar"));
+//   res.status(200).send(await User.find({}).select("-password -avatar"));
 
-});
+// });
 
 module.exports = router;
