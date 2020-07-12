@@ -19,11 +19,11 @@ module.exports = async function (req, res, next) {
         if (decoded.expiration < new Date().getTime() && decoded.expiration != -1) {
             throw new Error("Invalid token");
         }
-        req.user = decoded;
         const user = await User.findById(decoded._id);
 
         user.lastSeen = Date.now();
         user.save();
+        req.user = user.toJSON();
         next();
     } catch (ex) {
         //if invalid token

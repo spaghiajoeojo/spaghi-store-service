@@ -153,10 +153,13 @@ router.get("/friends", auth, async (req, res) => {
   res.send(user);
 });
 
-// router.get("/", async (req, res) => {
+router.get("/all", auth, async (req, res) => {
+  if (req.user.admin) {
+    res.status(200).send(await User.find({}).select("-password -avatar"));
+  } else {
+    res.status(401).send("Not Authorized");
+  }
 
-//   res.status(200).send(await User.find({}).select("-password -avatar"));
-
-// });
+});
 
 module.exports = router;

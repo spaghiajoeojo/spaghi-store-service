@@ -39,7 +39,7 @@ app.use(function (err, req, res, next) {
 
 const port = process.env.PORT || 3000;
 let credentials;
-if (config.has("credetials")) {
+if (config.has("credentials")) {
     let crt_config = config.get("credentials");
     credentials = {
         key: fs.readFileSync(crt_config.key),
