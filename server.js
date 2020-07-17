@@ -2,6 +2,7 @@ const fs = require("fs");
 const config = require("config");
 const mongoose = require("mongoose");
 const usersRoute = require("./routes/user.route");
+const gamesRoute = require("./routes/game.route");
 const express = require("express");
 const app = express();
 const WebSocket = require("ws");
@@ -32,6 +33,7 @@ mongoose
 app.use(express.json());
 //use users route for api/users
 app.use("/api/users", usersRoute);
+app.use("/api/games", gamesRoute);
 
 app.use(function (err, req, res, next) {
     // error middleware

@@ -46,7 +46,7 @@ const UserSchema = new mongoose.Schema({
     },
     vip: {
         type: Boolean,
-        default: false
+        default: true
     },
     admin: {
         type: Boolean,
