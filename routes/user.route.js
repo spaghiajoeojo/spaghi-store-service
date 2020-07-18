@@ -33,9 +33,7 @@ router.post("/signup", async (req, res) => {
     error
   } = validate(req.body);
   if (error) {
-    return res.status(400).send({
-      error: error.details[0].message
-    });
+    return res.status(400).send(error.details[0].message);
   }
 
   //find an existing user
@@ -43,9 +41,7 @@ router.post("/signup", async (req, res) => {
     email: req.body.email
   });
   if (user) {
-    return res.status(400).send({
-      error: "User already registered."
-    });
+    return res.status(400).send("User already registered.");
   }
 
   user = new User({
@@ -72,15 +68,11 @@ router.post("/login", async (req, res) => {
     email: req.body.email
   });
   if (!user) {
-    return res.status(400).send({
-      error: "User not registered."
-    });
+    return res.status(400).send("User not registered.");
   }
 
   if (!await bcrypt.compare(req.body.password, user.password)) {
-    return res.status(400).send({
-      error: "Wrong password."
-    });
+    return res.status(400).send("Wrong password.");
   }
 
   user.lastSeen = Date.now();

@@ -84,14 +84,10 @@ router.get("/:game/download/:dataIndex", auth, async (req, res) => {
             const filePath = path.join(getGameDir(req.params.game), gameConfig.data[req.params.dataIndex].path);
             res.sendFile(filePath);
         } else {
-            res.status(404).send({
-                error: "Not Found."
-            });
+            res.status(404).send("Not Found.");
         }
     } else {
-        res.status(401).send({
-            error: "You can't download this game. Buy it."
-        });
+        res.status(401).send("You can't download this game. Buy it.");
     }
 });
 
@@ -105,9 +101,7 @@ router.get("/:game/redeem/:code", auth, async (req, res) => {
         license.save();
         res.status(200).send();
     } else {
-        res.status(400).send({
-            error: "Wrong code."
-        });
+        res.status(400).send("Wrong code.");
     }
 });
 
@@ -119,9 +113,7 @@ router.get("/:game/buy", auth, async (req, res) => {
     const gameConfig = getGameConfig(req.params.game);
 
     if (req.user.currency < gameConfig.price) {
-        res.status(402).send({
-            error: "Not enough pasta."
-        });
+        res.status(402).send("Not enough pasta.");
         return;
     }
 
